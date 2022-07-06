@@ -1,0 +1,35 @@
+MVC
+
+Model
+View
+Controller
+
+Simple Todo App
+Build a todo app that
+- adds task,
+- complete task,
+- delete task and
+- edit task
+
+// Task Model
+type Task {
+  id: string;
+  title: string;
+  description: string;
+  isComplete: boolean;
+}
+
+// Functionality
+Task
+addTask(Task)
+completeTask(shouldCompleteTask)
+deleteTask(id)
+updateTask(id, Task)
+
+// UI
+renderTaskList();
+
+
+Assignment - continue from index-final.js
+Edit Functionality
+And move #input-screen into javascript
