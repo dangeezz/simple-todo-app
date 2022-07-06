@@ -1,8 +1,9 @@
 // UI or VIEW
 const ui = {
-  renderTaskList() {
-    if (!app.$app) return
-    app.$app.innerHTML = todoapp.taskList
+  renderTaskList($el) {
+    if (!$el) return
+
+    $el.innerHTML = todoapp.taskList
       .map(task => {
         return /*html*/ `
             <div class="task" data-id="${task.id}">
@@ -67,6 +68,10 @@ const todoapp = {
 }
 
 const app = {
+  renderTaskList() {
+    ui.renderTaskList(this.$app);
+  },
+
   init() {
     this.$app = document.getElementById('todoapp')
     this.$title = document.getElementById('title')
@@ -100,7 +105,7 @@ const app = {
     if (title.trim() !== '') {
       this.clearInput()
       todoapp.addTask(new Task(title, description))
-      ui.renderTaskList()
+      this.renderTaskList()
       console.log('add: ', todoapp.taskList)
     }
   },
@@ -112,7 +117,7 @@ const app = {
 
     const task = todoapp.taskList.find(task => task.id === id)
     task && todoapp.toggleTaskCompletion(task)
-    ui.renderTaskList()
+    this.renderTaskList()
     console.log('complete: ', todoapp.taskList)
   },
 
@@ -122,7 +127,7 @@ const app = {
     if (!id) return
 
     todoapp.deleteTask(id)
-    ui.renderTaskList()
+    this.renderTaskList()
     console.log('delete: ', todoapp.taskList)
   },
 }
